@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: care-dashboard-deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: care-dashboard-production
+    spec:
+      containers:
+        - name: care-dash
+          image: accountid.dkr.ecr.ap-south-1.amazonaws.com/care-dash:production-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: care-dashboard
+              protocol: TCP
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "2000Mi"
+              cpu: "1"

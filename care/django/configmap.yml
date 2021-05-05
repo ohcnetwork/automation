@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: care-production
+  labels:
+    app: care
+    env: production
+    namespace: default
+data:
+  POSTGRES_DB: ''
+  POSTGRES_USER: ''
+  POSTGRES_HOST: ''
+  POSTGRES_PORT: ''
+  DJANGO_SETTINGS_MODULE: 'config.settings.production'
+  DJANGO_SECURE_SSL_REDIRECT: 'True'
+  USE_S3: 'True'
+  AWS_STORAGE_BUCKET_NAME: ''
+  CSRF_TRUSTED_ORIGINS: '[""]'
+  DJANGO_ALLOWED_HOSTS: '[""]'
+  RATE_LIMIT: "5/10m"
+  MAINTENANCE_MODE: "0"

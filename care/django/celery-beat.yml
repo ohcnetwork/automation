@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: care-production-celery-beat
+spec:
+  template:
+    metadata:
+      labels:
+        name: care-production-celery-beat
+        app: care-production-celery-beat
+        env: production
+        namespace: default
+    spec:
+      containers:
+        - name: care
+          image: accountid.dkr.ecr.ap-south-1.amazonaws.com/care:latest
+          imagePullPolicy: Always
+          resources:
+              requests:
+                  memory: "200Mi"
+                  cpu: "200m"
+              limits:
+                  memory: "2000Mi"
+                  cpu: "1"
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "celery --app=config.celery_app --loglevel=info beat" ]
+          ports:
+            - containerPort: 9000
+              name: django
+              protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: care-production
+          - secretRef:
+              name: care-production
+          env:
+            - name: RESTART_
+              value: "20200331015742"

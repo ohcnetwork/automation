@@ -1,0 +1,27 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: care-nginx-production
+spec:
+  template:
+    metadata:
+      labels:
+        app: care-nginx-production
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          name: nginx-conf-production
+      volumes:
+      - name: nginx-conf-production
+        configMap:
+          name: nginx-conf-production
+          items:
+            - key: nginx.conf
+              path: nginx.conf
+

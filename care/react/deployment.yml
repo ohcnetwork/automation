@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: care-fe-production-deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: care-fe-production
+    spec:
+      containers:
+        - name: care-fe
+          image: accountid.dkr.ecr.ap-south-1.amazonaws.com/care-fe:production-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: care-fe-prod
+              protocol: TCP
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "2000Mi"
+              cpu: "1"

@@ -1,0 +1,49 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: care-django-production
+spec:
+  template:
+    metadata:
+      labels:
+        name: care-django-production
+        app: care-django-production
+        env: production
+        namespace: default
+    spec:
+      containers:
+        - name: care
+          image: 998532567015.dkr.ecr.ap-south-1.amazonaws.com/care:production-latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: newrelic-ini
+              mountPath: /etc/newrelic.ini
+              subPath: newrelic.ini
+          resources:
+              requests:
+                  memory: "200Mi"
+                  cpu: "200m"
+              limits:
+                  memory: "2000Mi"
+                  cpu: "1"
+          command: 
+            - /start
+          ports:
+            - containerPort: 9000
+              name: django
+              protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: care-production
+          - secretRef:
+              name: care-production
+          env:
+            - name: RESTART_
+              value: "20200331015742"
+      volumes:
+        - name: newrelic-ini
+          secret:
+            secretName: care-production
+            items:
+              - key: NEWRELIC_INI
+                path: newrelic.ini

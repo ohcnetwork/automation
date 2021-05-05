@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: care-production-celery-worker
+  labels:
+    application: care-production-celery-worker
+    environment: production
+    namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: care-production-celery-worker
+  minReplicas: 4
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 100
