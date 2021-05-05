@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: care
-          image: 998532567015.dkr.ecr.ap-south-1.amazonaws.com/care:production-latest
+          image: accountid.dkr.ecr.ap-south-1.amazonaws.com/care:production-latest
           imagePullPolicy: Always
           volumeMounts:
             - name: newrelic-ini
