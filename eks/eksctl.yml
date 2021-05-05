@@ -5,7 +5,24 @@ metadata:
   name: care
   region: ap-south-1
 
-
+vpc:
+  id: "" // paste vpc id from terraform output
+  cidr: 20.0.0.0/16
+  subnets:
+    private:
+      ap-south-1a: { id: subnet-0153e560b3129a696 } // paste subnet id from terraform output here
+      ap-south-1b: { id: subnet-0153e560b3129a696 } // paste subnet id from terraform output here
+      ap-south-1c: { id: subnet-0153e560b3129a696 } // paste subnet id from terraform output here
+    public:
+      ap-south-1a: { id: subnet-0153e560b3129a696 } // paste subnet id from terraform output here
+      ap-south-1b: { id: subnet-009fa0199ec203c37 } // paste subnet id from terraform output here
+      ap-south-1c: { id: subnet-0153e560b3129a696 } // paste subnet id from terraform output here
+  nat:
+    gateway: HighlyAvailable
+  clusterEndpoints:
+    publicAccess: false
+    privateAccess: true
+  manageSharedNodeSecurityGroupRules: true
 nodeGroups:
   - name: care-base-ng
     instanceType: t3a.xlarge
@@ -13,4 +30,13 @@ nodeGroups:
     maxSize: 4
     desiredCapacity: 2
     volumeSize: 100
+    volumeType: gp3
+    volumeIOPS: 3000
+    volumeThroughput: 125
+    volumeEncrypted: true
     labels: { role : primary}
+    privateNetworking: true
+
+secretsEncryption:
+  # KMS key used for envelope encryption of Kubernetes secrets
+  keyARN: arn:aws:kms:ap-south-1:<account>:key/<key>
