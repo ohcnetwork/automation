@@ -1,0 +1,16 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: care
+  region: ap-south-1
+
+
+nodeGroups:
+  - name: care-base-ng
+    instanceType: t3a.xlarge
+    minSize: 2
+    maxSize: 4
+    desiredCapacity: 2
+    volumeSize: 100
+    labels: { role : primary}

@@ -88,8 +88,8 @@ output "db_instance_username" {
 }
 
 output "db_instance_password" {
-  value       = module.db.db_instance_password
-  sensitive   = true
+  value     = module.db.db_instance_password
+  sensitive = true
 }
 
 output "db_instance_port" {

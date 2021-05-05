@@ -36,10 +36,10 @@ variable "postgres_password" {
 }
 
 variable "postgres_port" {
-  default = 5432   // using 5432 is not recommended choose a higher level port between 54000 - 70000
+  default = 5432 // using 5432 is not recommended choose a higher level port between 54000 - 70000
 }
 
 variable "kms_key_id" {
-  default = ""
+  default     = ""
   description = "Create a kms key using aws kms then copy the key id here. make sure to use the same key everywhere"
 }

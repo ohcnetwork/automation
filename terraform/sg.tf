@@ -53,9 +53,9 @@ resource "aws_security_group" "postgres" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    from_port = 5432
-    to_port   = 5432
-    protocol  = "tcp"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
     description = "PostgreSQL access from within VPC"
     cidr_blocks = module.vpc.private_subnets_cidr_blocks
   }
