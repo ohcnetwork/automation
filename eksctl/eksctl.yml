@@ -5,6 +5,9 @@ metadata:
   name: care
   region: ap-south-1
 
+kubernetesNetworkConfig:
+  serviceIPv4CIDR: 20.100.0.0/16
+
 vpc:
   id: "" // paste vpc id from terraform output
   cidr: 20.0.0.0/16
