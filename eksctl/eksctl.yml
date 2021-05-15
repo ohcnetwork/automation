@@ -25,7 +25,7 @@ nodeGroups:
   - name: care-base-ng
     instanceType: t3a.xlarge
     minSize: 2
-    maxSize: 4
+    maxSize: 20
     desiredCapacity: 2
     volumeSize: 100
     volumeType: gp3

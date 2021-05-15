@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: care-production-celery-beat
@@ -36,3 +36,6 @@ spec:
           env:
             - name: RESTART_
               value: "20200331015742"
+  selector:
+    matchLabels:
+      app: care-production-celery-beat

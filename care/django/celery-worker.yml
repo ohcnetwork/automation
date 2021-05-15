@@ -1,5 +1,4 @@
-
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: care-production-celery-worker
@@ -45,3 +44,6 @@ spec:
             items:
               - key: NEWRELIC_INI
                 path: newrelic.ini
+  selector:
+    matchLabels:
+      app: care-production-celery-worker
