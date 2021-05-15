@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: care-fe-production-deployment
@@ -23,3 +23,6 @@ spec:
             limits:
               memory: "2000Mi"
               cpu: "1"
+  selector:
+    matchLabels:
+      app: care-fe-production

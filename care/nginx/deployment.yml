@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: care-nginx-production
@@ -24,4 +24,7 @@ spec:
           items:
             - key: nginx.conf
               path: nginx.conf
+  selector:
+    matchLabels:
+      app: care-nginx-production
 
