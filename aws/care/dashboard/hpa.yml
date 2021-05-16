@@ -4,7 +4,7 @@ metadata:
   name: care-dashboard-autoscaler
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     name: care-dashboard-deployment
   minReplicas: 2
