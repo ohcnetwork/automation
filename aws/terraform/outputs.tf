@@ -34,3 +34,8 @@ output "azs" {
   description = "A list of availability zones specified as argument to this module"
   value       = module.vpc.azs
 }
+
+output "cluster_name" {
+  description = "Kubernetes Cluster Name"
+  value       = var.eks_cluster_name
+}

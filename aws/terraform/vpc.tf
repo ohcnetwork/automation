@@ -39,11 +39,9 @@ module "vpc" {
   create_flow_log_cloudwatch_iam_role  = true
   flow_log_max_aggregation_interval    = 60
   tags = {
-    Environment = var.environment
+    Environment = "production"
     Terraform   = "true"
     Owner       = var.namespace
-    Environment = var.environment
   }
 
 }
-
