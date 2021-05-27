@@ -25,7 +25,7 @@ resource "azurerm_postgresql_database" "care-db" {
   resource_group_name = data.azurerm_resource_group.rg.name
   server_name         = azurerm_postgresql_server.care.name
   charset             = "UTF8"
-  collation           = "English_United States.1252"
+  collation           = "en-US"
 }
 
 resource "azurerm_postgresql_virtual_network_rule" "pg_rule" {
