@@ -1,8 +1,3 @@
-data "azurerm_subnet" "postgres-subnet" {
-  name                = azurerm_subnet.postgres-subnet.name
-  virtual_network_name = "vnet"
-  resource_group_name = "RG-Coronasafe"
-}
 
 resource "azurerm_postgresql_server" "care" {
   name                = "care-server"
@@ -37,7 +32,7 @@ resource "azurerm_postgresql_virtual_network_rule" "pg_rule" {
   name                                 = "postgresql-vnet-rule"
   resource_group_name                  = data.azurerm_resource_group.rg.name
   server_name                          = azurerm_postgresql_server.care.name
-  subnet_id                            = data.azurerm_subnet.postgres-subnet.id
+  subnet_id                            = azurerm_subnet.postgres-subnet.id
   ignore_missing_vnet_service_endpoint = true
 }
 
