@@ -44,20 +44,6 @@ resource "azurerm_postgresql_firewall_rule" "caredbfirewall" {
   end_ip_address      = "10.0.255.255"
 }
 
-resource "azurerm_private_endpoint" "care-db-pe" {
-  name                = "care_db_endpoint"
-  location            = data.azurerm_resource_group.rg.location
-  resource_group_name = data.azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.postgres-subnet.id
-
-  private_service_connection {
-    name                           = "care_private_db_conn"
-    private_connection_resource_id = azurerm_postgresql_server.care.id
-    subresource_names              = ["postgresqlServer"]
-    is_manual_connection           = false
-  }
-}
-
 output "postgresql_server_id" {
   value = azurerm_postgresql_server.care.id
 }
