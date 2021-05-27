@@ -7,7 +7,7 @@ resource "azurerm_postgresql_server" "care" {
   administrator_login          = "psqladminun"
   administrator_login_password = "H@Sh1CoR3!"
 
-  sku_name   = "B_Gen5_1"
+  sku_name   = "GP_Gen5_2"
   version    = "11"
   storage_mb = 10240
 
@@ -42,6 +42,20 @@ resource "azurerm_postgresql_firewall_rule" "caredbfirewall" {
   server_name         = azurerm_postgresql_database.care-db.name
   start_ip_address    = "10.0.0.0"
   end_ip_address      = "10.0.255.255"
+}
+
+resource "azurerm_private_endpoint" "care-db-pe" {
+  name                = "care_db_endpoint"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  subnet_id           = azurerm_subnet.postgres-subnet.id
+
+  private_service_connection {
+    name                           = "care_private_db_conn"
+    private_connection_resource_id = azurerm_postgresql_server.care.id
+    subresource_names              = ["postgresqlServer"]
+    is_manual_connection           = false
+  }
 }
 
 output "postgresql_server_id" {
